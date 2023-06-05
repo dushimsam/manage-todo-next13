@@ -4,7 +4,7 @@ This application uses NextJs 13 as the full stack framework. It connects to a Po
 
 ## HOW TO RUN THE PROJECT
 
-1. git clone https://github.com/dushimsam/manage-todo-next13
+1. `git clone https://github.com/dushimsam/manage-todo-next13`
 2. `cd manage-todo-next13`
 3. `npm run dev`
 
