@@ -6,6 +6,7 @@ This application uses NextJs 13 as the full stack framework. It connects to a Po
 
 1. `git clone https://github.com/dushimsam/manage-todo-next13`
 2. `cd manage-todo-next13`
-3. `npm run dev`
+3. `npm install`
+4. `npm run dev`
 
 After following the above steps, the app should start running at _http://localhost:3000_
