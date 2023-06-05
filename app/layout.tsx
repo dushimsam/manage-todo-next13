@@ -1,21 +1,24 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
+"use client"
 
-const inter = Inter({ subsets: ['latin'] })
+import "./globals.css";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
 
-export const metadata = {
-  title: 'Todo list app',
-  description: 'Manage my todo list items',
-}
+
+const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
-  )
+    <QueryClientProvider client={queryClient}>
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    </QueryClientProvider>
+  );
 }
