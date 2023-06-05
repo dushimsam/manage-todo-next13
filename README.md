@@ -1,6 +1,6 @@
 ## TO-DO LIST APP
 
-This application uses NextJs 13 as the full stack framework. It connects to a PostgreSQL database through Hasura GraphQL, which generates the API automatically. It also uses Tailwind and Radix UI for styling the user interface.
+This application uses NextJs 13 as the full stack framework. It connects to a PostgreSQL database through Hasura GraphQL, which generates the API automatically and integrates GraphQL Codegen for generating the query documents. It also uses Tailwind and Radix UI for styling the user interface.
 
 ### HOW TO RUN THE PROJECT
 
