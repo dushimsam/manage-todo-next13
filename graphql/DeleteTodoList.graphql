@@ -1,0 +1,8 @@
+mutation DeleteTodoList($todoId: bigint!) {
+  delete_todolist_by_pk(id: $todoId) {
+    completed
+    created_at
+    id
+    text
+  }
+}

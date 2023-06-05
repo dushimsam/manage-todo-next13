@@ -1,6 +1,5 @@
 /* eslint-disable */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
-import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -81,9 +80,9 @@ export type Bigint_Comparison_Exp = {
 /** ordering argument of a cursor */
 export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
-  Asc = 'ASC',
+  ASC = 'ASC',
   /** descending ordering of the cursor */
-  Desc = 'DESC'
+  DESC = 'DESC'
 }
 
 /** mutation root */
@@ -158,15 +157,15 @@ export enum Order_By {
   /** in ascending order, nulls last */
   Asc = 'asc',
   /** in ascending order, nulls first */
-  AscNullsFirst = 'asc_nulls_first',
+  Asc_nulls_first = 'asc_nulls_first',
   /** in ascending order, nulls last */
-  AscNullsLast = 'asc_nulls_last',
+  Asc_nulls_last = 'asc_nulls_last',
   /** in descending order, nulls first */
   Desc = 'desc',
   /** in descending order, nulls first */
-  DescNullsFirst = 'desc_nulls_first',
+  Desc_nulls_first = 'desc_nulls_first',
   /** in descending order, nulls last */
-  DescNullsLast = 'desc_nulls_last'
+  Desc_nulls_last = 'desc_nulls_last'
 }
 
 export type Query_Root = {
@@ -316,7 +315,7 @@ export type Todolist_Bool_Exp = {
 /** unique or primary key constraints on table "todolist" */
 export enum Todolist_Constraint {
   /** unique or primary key constraint on columns "id" */
-  TodolistPkey = 'todolist_pkey'
+  Todolist_pkey = 'todolist_pkey'
 }
 
 /** input type for incrementing numeric columns in table "todolist" */
@@ -382,7 +381,7 @@ export enum Todolist_Select_Column {
   /** column name */
   Completed = 'completed',
   /** column name */
-  CreatedAt = 'created_at',
+  Created_at = 'created_at',
   /** column name */
   Id = 'id',
   /** column name */
@@ -442,7 +441,7 @@ export enum Todolist_Update_Column {
   /** column name */
   Completed = 'completed',
   /** column name */
-  CreatedAt = 'created_at',
+  Created_at = 'created_at',
   /** column name */
   Id = 'id',
   /** column name */
@@ -476,13 +475,45 @@ export type Todolist_Variance_Fields = {
   id?: Maybe<Scalars['Float']['output']>;
 };
 
-export type GetAllTodosQueryVariables = Exact<{ [key: string]: never; }>;
+export type AddTodoMutationVariables = Exact<{
+  text: Scalars['String']['input'];
+}>;
 
 
-export type GetAllTodosQuery = { __typename?: 'query_root', todolist: Array<{ __typename?: 'todolist', text?: string | null }> };
+export type AddTodoMutation = { __typename?: 'mutation_root', insert_todolist?: { __typename?: 'todolist_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'todolist', id: any, text?: string | null, completed?: boolean | null, created_at?: any | null }> } | null };
+
+export type DeleteTodoListMutationVariables = Exact<{
+  todoId: Scalars['bigint']['input'];
+}>;
 
 
-export const GetAllTodosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllTodos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"todolist"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]} as unknown as DocumentNode<GetAllTodosQuery, GetAllTodosQueryVariables>;
+export type DeleteTodoListMutation = { __typename?: 'mutation_root', delete_todolist_by_pk?: { __typename?: 'todolist', completed?: boolean | null, created_at?: any | null, id: any, text?: string | null } | null };
+
+export type FetchTodoListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FetchTodoListQuery = { __typename?: 'query_root', todolist: Array<{ __typename?: 'todolist', completed?: boolean | null, created_at?: any | null, id: any, text?: string | null }> };
+
+export type FetchTodoListByStatusQueryVariables = Exact<{
+  status: Scalars['Boolean']['input'];
+}>;
+
+
+export type FetchTodoListByStatusQuery = { __typename?: 'query_root', todolist: Array<{ __typename?: 'todolist', completed?: boolean | null, created_at?: any | null, id: any, text?: string | null }> };
+
+export type UpdateTodoListMutationVariables = Exact<{
+  todoId: Scalars['bigint']['input'];
+}>;
+
+
+export type UpdateTodoListMutation = { __typename?: 'mutation_root', update_todolist_by_pk?: { __typename?: 'todolist', completed?: boolean | null, created_at?: any | null, id: any, text?: string | null } | null };
+
+
+export const AddTodoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AddTodo"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"text"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_todolist"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"text"},"value":{"kind":"Variable","name":{"kind":"Name","value":"text"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"completed"},"value":{"kind":"BooleanValue","value":false}}]}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}},{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"completed"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}}]}}]}}]}}]} as unknown as DocumentNode<AddTodoMutation, AddTodoMutationVariables>;
+export const DeleteTodoListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteTodoList"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"todoId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"bigint"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_todolist_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"todoId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"completed"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]} as unknown as DocumentNode<DeleteTodoListMutation, DeleteTodoListMutationVariables>;
+export const FetchTodoListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FetchTodoList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"todolist"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"completed"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]} as unknown as DocumentNode<FetchTodoListQuery, FetchTodoListQueryVariables>;
+export const FetchTodoListByStatusDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FetchTodoListByStatus"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"status"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"todolist"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"completed"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"status"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"completed"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]} as unknown as DocumentNode<FetchTodoListByStatusQuery, FetchTodoListByStatusQueryVariables>;
+export const UpdateTodoListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateTodoList"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"todoId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"bigint"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_todolist_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"todoId"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"completed"},"value":{"kind":"BooleanValue","value":true}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"completed"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]} as unknown as DocumentNode<UpdateTodoListMutation, UpdateTodoListMutationVariables>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string | number; output: string; }
@@ -556,9 +587,9 @@ export type Bigint_Comparison_Exp = {
 /** ordering argument of a cursor */
 export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
-  Asc = 'ASC',
+  ASC = 'ASC',
   /** descending ordering of the cursor */
-  Desc = 'DESC'
+  DESC = 'DESC'
 }
 
 /** mutation root */
@@ -633,15 +664,15 @@ export enum Order_By {
   /** in ascending order, nulls last */
   Asc = 'asc',
   /** in ascending order, nulls first */
-  AscNullsFirst = 'asc_nulls_first',
+  Asc_nulls_first = 'asc_nulls_first',
   /** in ascending order, nulls last */
-  AscNullsLast = 'asc_nulls_last',
+  Asc_nulls_last = 'asc_nulls_last',
   /** in descending order, nulls first */
   Desc = 'desc',
   /** in descending order, nulls first */
-  DescNullsFirst = 'desc_nulls_first',
+  Desc_nulls_first = 'desc_nulls_first',
   /** in descending order, nulls last */
-  DescNullsLast = 'desc_nulls_last'
+  Desc_nulls_last = 'desc_nulls_last'
 }
 
 export type Query_Root = {
@@ -791,7 +822,7 @@ export type Todolist_Bool_Exp = {
 /** unique or primary key constraints on table "todolist" */
 export enum Todolist_Constraint {
   /** unique or primary key constraint on columns "id" */
-  TodolistPkey = 'todolist_pkey'
+  Todolist_pkey = 'todolist_pkey'
 }
 
 /** input type for incrementing numeric columns in table "todolist" */
@@ -857,7 +888,7 @@ export enum Todolist_Select_Column {
   /** column name */
   Completed = 'completed',
   /** column name */
-  CreatedAt = 'created_at',
+  Created_at = 'created_at',
   /** column name */
   Id = 'id',
   /** column name */
@@ -917,7 +948,7 @@ export enum Todolist_Update_Column {
   /** column name */
   Completed = 'completed',
   /** column name */
-  CreatedAt = 'created_at',
+  Created_at = 'created_at',
   /** column name */
   Id = 'id',
   /** column name */
@@ -951,19 +982,39 @@ export type Todolist_Variance_Fields = {
   id?: Maybe<Scalars['Float']['output']>;
 };
 
-export type GetAllTodosQueryVariables = Exact<{ [key: string]: never; }>;
+export type AddTodoMutationVariables = Exact<{
+  text: Scalars['String']['input'];
+}>;
 
 
-export type GetAllTodosQuery = { __typename?: 'query_root', todolist: Array<{ __typename?: 'todolist', text?: string | null }> };
+export type AddTodoMutation = { __typename?: 'mutation_root', insert_todolist?: { __typename?: 'todolist_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'todolist', id: any, text?: string | null, completed?: boolean | null, created_at?: any | null }> } | null };
+
+export type DeleteTodoListMutationVariables = Exact<{
+  todoId: Scalars['bigint']['input'];
+}>;
 
 
-export const GetAllTodos = gql`
-    query GetAllTodos {
-  todolist {
-    text
-  }
-}
-    `;
+export type DeleteTodoListMutation = { __typename?: 'mutation_root', delete_todolist_by_pk?: { __typename?: 'todolist', completed?: boolean | null, created_at?: any | null, id: any, text?: string | null } | null };
+
+export type FetchTodoListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FetchTodoListQuery = { __typename?: 'query_root', todolist: Array<{ __typename?: 'todolist', completed?: boolean | null, created_at?: any | null, id: any, text?: string | null }> };
+
+export type FetchTodoListByStatusQueryVariables = Exact<{
+  status: Scalars['Boolean']['input'];
+}>;
+
+
+export type FetchTodoListByStatusQuery = { __typename?: 'query_root', todolist: Array<{ __typename?: 'todolist', completed?: boolean | null, created_at?: any | null, id: any, text?: string | null }> };
+
+export type UpdateTodoListMutationVariables = Exact<{
+  todoId: Scalars['bigint']['input'];
+}>;
+
+
+export type UpdateTodoListMutation = { __typename?: 'mutation_root', update_todolist_by_pk?: { __typename?: 'todolist', completed?: boolean | null, created_at?: any | null, id: any, text?: string | null } | null };
+
 import { IntrospectionQuery } from 'graphql';
 export default {
   "__schema": {

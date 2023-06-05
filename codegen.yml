@@ -2,16 +2,16 @@ overwrite: true
 schema:
   -  ${HASURA_PROJECT_ENDPOINT}:
       headers:
-        x-hasura-admin-secret:  "${HASURA_ADMIN_SECRET}"
-documents: "queries/**/*.graphql"
+        x-hasura-admin-secret:  "${NEXT_PUBLIC_HASURA_ADMIN_SECRET}"
+documents: "graphql/**/*.graphql"
 generates:
   generated/gql/:
     preset: "client"
     plugins:
       - "typescript"
       - "typescript-operations"
-      - "typescript-document-nodes"
+      # - "typescript-react-query"
       - "urql-introspection"
-  ./graphql.schema.json:
-    plugins:
-      - "introspection"
+    config:
+      namingConvention:
+        enumValues: change-case-all#upperCaseFirst

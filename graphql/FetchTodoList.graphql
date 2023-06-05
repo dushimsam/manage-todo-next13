@@ -1,0 +1,8 @@
+query FetchTodoList {
+  todolist {
+    completed
+    created_at
+    id
+    text
+  }
+}

@@ -1,0 +1,11 @@
+    mutation AddTodo($text: String!) {
+      insert_todolist(objects: [{ text: $text, completed: false }]) {
+        affected_rows
+        returning {
+          id
+          text
+          completed
+          created_at
+        }
+      }
+    }

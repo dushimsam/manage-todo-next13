@@ -1,0 +1,8 @@
+mutation UpdateTodoList($todoId: bigint!) {
+  update_todolist_by_pk(pk_columns: { id: $todoId }, _set: { completed: true }) {
+    completed
+    created_at
+    id
+    text
+  }
+}

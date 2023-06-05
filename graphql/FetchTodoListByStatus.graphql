@@ -1,0 +1,8 @@
+query FetchTodoListByStatus($status: Boolean!) {
+  todolist(where: { completed: { _eq: $status } }) {
+    completed
+    created_at
+    id
+    text
+  }
+}

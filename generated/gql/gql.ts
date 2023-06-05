@@ -13,7 +13,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "query GetAllTodos {\n  todolist {\n    text\n  }\n}": types.GetAllTodosDocument,
+    "mutation AddTodo($text: String!) {\n  insert_todolist(objects: [{text: $text, completed: false}]) {\n    affected_rows\n    returning {\n      id\n      text\n      completed\n      created_at\n    }\n  }\n}": types.AddTodoDocument,
+    "mutation DeleteTodoList($todoId: bigint!) {\n  delete_todolist_by_pk(id: $todoId) {\n    completed\n    created_at\n    id\n    text\n  }\n}": types.DeleteTodoListDocument,
+    "query FetchTodoList {\n  todolist {\n    completed\n    created_at\n    id\n    text\n  }\n}": types.FetchTodoListDocument,
+    "query FetchTodoListByStatus($status: Boolean!) {\n  todolist(where: {completed: {_eq: $status}}) {\n    completed\n    created_at\n    id\n    text\n  }\n}": types.FetchTodoListByStatusDocument,
+    "mutation UpdateTodoList($todoId: bigint!) {\n  update_todolist_by_pk(pk_columns: {id: $todoId}, _set: {completed: true}) {\n    completed\n    created_at\n    id\n    text\n  }\n}": types.UpdateTodoListDocument,
 };
 
 /**
@@ -33,7 +37,23 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query GetAllTodos {\n  todolist {\n    text\n  }\n}"): (typeof documents)["query GetAllTodos {\n  todolist {\n    text\n  }\n}"];
+export function graphql(source: "mutation AddTodo($text: String!) {\n  insert_todolist(objects: [{text: $text, completed: false}]) {\n    affected_rows\n    returning {\n      id\n      text\n      completed\n      created_at\n    }\n  }\n}"): (typeof documents)["mutation AddTodo($text: String!) {\n  insert_todolist(objects: [{text: $text, completed: false}]) {\n    affected_rows\n    returning {\n      id\n      text\n      completed\n      created_at\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation DeleteTodoList($todoId: bigint!) {\n  delete_todolist_by_pk(id: $todoId) {\n    completed\n    created_at\n    id\n    text\n  }\n}"): (typeof documents)["mutation DeleteTodoList($todoId: bigint!) {\n  delete_todolist_by_pk(id: $todoId) {\n    completed\n    created_at\n    id\n    text\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query FetchTodoList {\n  todolist {\n    completed\n    created_at\n    id\n    text\n  }\n}"): (typeof documents)["query FetchTodoList {\n  todolist {\n    completed\n    created_at\n    id\n    text\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query FetchTodoListByStatus($status: Boolean!) {\n  todolist(where: {completed: {_eq: $status}}) {\n    completed\n    created_at\n    id\n    text\n  }\n}"): (typeof documents)["query FetchTodoListByStatus($status: Boolean!) {\n  todolist(where: {completed: {_eq: $status}}) {\n    completed\n    created_at\n    id\n    text\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation UpdateTodoList($todoId: bigint!) {\n  update_todolist_by_pk(pk_columns: {id: $todoId}, _set: {completed: true}) {\n    completed\n    created_at\n    id\n    text\n  }\n}"): (typeof documents)["mutation UpdateTodoList($todoId: bigint!) {\n  update_todolist_by_pk(pk_columns: {id: $todoId}, _set: {completed: true}) {\n    completed\n    created_at\n    id\n    text\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
